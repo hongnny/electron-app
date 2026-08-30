@@ -1,0 +1,30 @@
+{
+  "name": "electron-multi-tab",
+  "private": true,
+  "version": "0.2.0",
+  "description": "An Electron multi-tab workspace with independent Vite React apps.",
+  "main": "dist-electron/main/bootstrap.js",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "build:electron": "esbuild electron/main/bootstrap.ts electron/preload/shell-preload.ts electron/preload/tab-preload.ts --bundle --platform=node --format=cjs --external:electron --outbase=electron --outdir=dist-electron --sourcemap",
+    "watch:electron": "npm run build:electron -- --watch",
+    "dev": "npm run build:electron && concurrently -k \"npm run dev --workspace @electron-tabs/shell\" \"npm run dev --workspace @electron-tabs/app-home\" \"npm run dev --workspace @electron-tabs/app-settings\" \"npm run dev --workspace @electron-tabs/app-workspace\" \"npm run watch:electron\" \"wait-on http://127.0.0.1:5173 http://127.0.0.1:5174 http://127.0.0.1:5175 http://127.0.0.1:5176 && cross-env ELECTRON_SHELL_URL=http://127.0.0.1:5173 ELECTRON_APP_HOME_URL=http://127.0.0.1:5174 ELECTRON_APP_SETTINGS_URL=http://127.0.0.1:5175 ELECTRON_APP_WORKSPACE_URL=http://127.0.0.1:5176 nodemon --watch dist-electron --ext js --exec 'electron .'\"",
+    "build": "npm run build:electron && npm run build --workspaces --if-present",
+    "typecheck": "tsc --noEmit && npm run typecheck --workspaces --if-present",
+    "test": "tsx --test test/*.test.ts",
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "concurrently": "latest",
+    "cross-env": "latest",
+    "electron": "latest",
+    "esbuild": "latest",
+    "nodemon": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "wait-on": "latest"
+  }
+}

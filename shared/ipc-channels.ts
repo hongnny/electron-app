@@ -7,5 +7,5 @@ export const TAB_CHANNELS = {
 } as const
 
 export const WINDOW_CHANNELS = {
-  openHome: 'windows:open-home',
+  open: 'windows:open',
 } as const

@@ -5,3 +5,7 @@ export const TAB_CHANNELS = {
   close: 'tabs:close',
   changed: 'tabs:changed',
 } as const
+
+export const WINDOW_CHANNELS = {
+  openHome: 'windows:open-home',
+} as const

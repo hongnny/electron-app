@@ -1,1 +1,8 @@
-declare interface Window { tabRuntime?: { rendererPid: number; platform: string } }
+import type { DesktopWindowsApi, TabRuntimeInfo } from '../../../shared/window-contract'
+
+declare global {
+  interface Window {
+    tabRuntime?: TabRuntimeInfo
+    desktopWindows?: DesktopWindowsApi
+  }
+}

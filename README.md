@@ -8,9 +8,7 @@
 electron-multi-tab-demo/
 ├── apps/
 │   ├── shell/                         # 顶部标签栏 React 项目
-│   ├── app-home/                      # 首页 Vite React 项目
-│   ├── app-settings/                  # 设置 Vite React 项目
-│   └── app-workspace/                 # 工作台 Vite React 项目
+│   └── app-home/                      # 首页 Vite React 项目
 │
 ├── electron/
 │   ├── main/
@@ -58,8 +56,6 @@ npm run dev
 
 - Shell：5173
 - Home：5174
-- Settings：5175
-- Workspace：5176
 
 ## 验证
 

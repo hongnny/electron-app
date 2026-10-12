@@ -1,0 +1,24 @@
+# 固定应用身份；两个版本必须使用同一个 appId 和 productName。
+appId: com.example.electron-update-learning
+productName: Electron Update Learning
+# 从生产输出打包，开发源码、测试与本地更新服务器不进入安装包。
+files:
+  - dist/**/*
+  - dist-electron/**/*
+  - package.json
+  - '!**/*.map'
+directories:
+  output: release/${version}
+# 仅用于本机学习。正式发布应换成自己的 HTTPS 地址并重新打包。
+publish:
+  provider: generic
+  url: http://127.0.0.1:8088
+mac:
+  # zip 供 Squirrel.Mac 更新使用；dmg 供用户首次安装使用。
+  target:
+    - zip
+    - dmg
+win:
+  target: nsis
+linux:
+  target: AppImage

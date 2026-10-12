@@ -14,6 +14,7 @@ import { WindowRegistry } from './windows/WindowRegistry'
 import { WindowService } from './windows/WindowService'
 import { ElectronWindowHost } from './windows/ElectronWindowHost'
 import { WindowIpcController } from './ipc/WindowIpcController'
+import { UpdateService } from './updates/UpdateService'
 
 interface ApplicationContext {
   window: BrowserWindow
@@ -61,6 +62,8 @@ function createApplicationContext(apps: TabAppRegistry): ApplicationContext {
 }
 
 app.whenReady().then(() => {
+  // 应用级装配更新服务，具体检查、下载和安装逻辑归服务管理。
+  new UpdateService().start()
   const apps = TabAppRegistry.createDefault({
     projectRoot: path.join(__dirname, '..', '..'),
     developmentUrls: { home: process.env.ELECTRON_APP_HOME_URL }

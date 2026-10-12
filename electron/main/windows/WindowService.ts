@@ -35,7 +35,6 @@ export class WindowService<TWindow, TSender> {
   // 统一打开入口：先取得页面定义，再按单例或多实例策略处理。
   async open(input: OpenWindowInput): Promise<OpenWindowResult> {
     const { apps, registry, host } = this.dependencies
-    console.log('==>>>inpit', input.kind)
     const definition = apps.get(input.kind)
     if (definition.instancePolicy === 'singleton') {
       // 同类型窗口正在创建时，等待同一次创建，避免快速连点生成多个实例。
@@ -44,7 +43,6 @@ export class WindowService<TWindow, TSender> {
 
       // 已有窗口直接恢复并聚焦，不重新加载页面，保留当前业务状态。
       const existing = registry.find(input.kind)
-      console.log('WindowService.ts 47 existing', existing);
       if (existing && !host.isDestroyed(existing.window)) {
         host.focus(existing.window)
         return { instanceId: existing.id, reused: true }
